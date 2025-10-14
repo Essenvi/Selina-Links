@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selina Links</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #0f0f1a;
+            color: white;
+            min-height: 100vh;
+        }
+        
+        /* HEADER COM FOTO DE FUNDO */
+        .header {
+            position: relative;
+            height: 200px;
+            background: linear-gradient(rgba(15,15,26,0.7), rgba(15,15,26,0.5)), 
+                        url('https://i.imgur.com/Qvp3vYM.jpeg');
+            background-size: cover;
+            background-position: center 60%;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            margin-bottom: 40px;
+        }
+        
+        .profile-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .profile-pic {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255,255,255,0.8);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .name {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+        
+        /* LOGOS NO TOPO - 5 COLUNAS */
+        .top-logos {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+            padding: 0 20px;
+        }
+        
+        .logo-item {
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .logo-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .logo-icon {
+            width: 65px;
+            height: 65px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .logo-icon img {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+        }
+        
+        .logo-item:hover .logo-icon {
+            background: rgba(255,255,255,0.2);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+            transform: scale(1.1);
+        }
+        
+        .logo-name {
+            font-size: 0.95em;
+            font-weight: 600;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            padding: 7px 14px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        /* GALERIA DE FOTOS - GRID RESPONSIVO */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 25px 50px;
+        }
+        
+        .photo-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .photo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            background: rgba(255,255,255,0.08);
+        }
+        
+        .photo-container {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+        }
+        
+        .photo-link {
+            display: block;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-card:hover .photo-container img {
+            transform: scale(1.05);
+        }
+        
+        /* LOGO NO CANTO DA FOTO */
+        .photo-logo {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1em;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.6);
+            z-index: 2;
+        }
+        
+        .photo-logo img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+        
+        /* NOME DENTRO DA FOTO */
+        .platform-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 18px;
+            text-align: center;
+            font-weight: 600;
+            color: white;
+            font-size: 1.1em;
+            background: rgba(60, 60, 60, 0.7);
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin: 0;
+            z-index: 2;
+        }
+        
+        /* CORES DAS LOGOS */
+        .instagram { 
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .twitter { color: #1DA1F2; }
+        .whatsapp { color: #25D366; }
+        .telegram { color: #0088cc; }
+        
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .header {
+                height: 150px;
+                padding: 0 20px;
+            }
+            
+            .profile-pic {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .name {
+                font-size: 2em;
+            }
+            
+            .top-logos {
+                gap: 25px;
+            }
+            
+            .logo-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 1.6em;
+            }
+            
+            .logo-icon img {
+                width: 25px;
+                height: 25px;
+            }
+            
+            .logo-name {
+                padding: 6px 12px;
+                font-size: 0.85em;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 20px 30px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- HEADER COM FOTO DE FUNDO -->
+    <div class="header">
+        <div class="profile-container">
+            <img src="https://i.imgur.com/z82fcBc.jpeg" 
+                 alt="Selina" 
+                 class="profile-pic">
+            <div class="name">Selina</div>
+        </div>
+    </div>
+    
+    <!-- LOGOS NO TOPO - 5 PLATAFORMAS -->
+    <div class="top-logos">
+        <!-- PRIVACY -->
+        <div class="logo-item" onclick="window.open('https://privacy.com.br/profile/SelinaHy', '_blank')">
+            <div class="logo-icon">
+                <img src="https://i.imgur.com/3eyn7gr.png" alt="Privacy">
+            </div>
+            <div class="logo-name">Privacy</div>
+        </div>
+        
+        <!-- TELEGRAM -->
+        <div class="logo-item" onclick="window.open('https://t.me/SelinaSalvatoreBot', '_blank')">
+            <div class="logo-icon telegram">
+                <i class="fab fa-telegram"></i>
+            </div>
+            <div class="logo-name">Telegram VIP</div>
+        </div>
+        
+        <!-- WHATSAPP -->
+        <div class="logo-item" onclick="window.open('https://w.app/q2op4q', '_blank')">
+            <div class="logo-icon whatsapp">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+            <div class="logo-name">WhatsApp</div>
+        </div>
+        
+        <!-- TWITTER -->
+        <div class="logo-item" onclick="window.open('https://x.com/ravenablxck?s=21', '_blank')">
+            <div class="logo-icon twitter">
+                <i class="fab fa-twitter"></i>
+            </div>
+            <div class="logo-name">Twitter</div>
+        </div>
+        
+        <!-- INSTAGRAM -->
+        <div class="logo-item" onclick="window.open('https://www.instagram.com/selina.salvatore?igsh=ZWR3dmVqcmVoNWZ5&utm_source=qr', '_blank')">
+            <div class="logo-icon instagram">
+                <i class="fab fa-instagram"></i>
+            </div>
+            <div class="logo-name">Instagram</div>
+        </div>
+    </div>
+
+    <!-- GALERIA DE FOTOS - 5 PLATAFORMAS -->
+    <div class="gallery">
+        <!-- PRIVACY -->
+        <div class="photo-card">
+            <div class="photo-container">
+                <a href="https://privacy.com.br/profile/SelinaHy" 
+                   target="_blank" 
+                   class="photo-link">
+                    <img src="https://i.imgur.com/Ed205gl.jpeg" alt="Privacy">
+                </a>
+                <div class="photo-logo">
+                    <img src="https://i.imgur.com/3eyn7gr.png" alt="Privacy">
+                </div>
+                <div class="platform-name">Privacy</div>
+            </div>
+        </div>
+        
+        <!-- INSTAGRAM -->
+        <div class="photo-card">
+            <div class="photo-container">
+                <a href="https://www.instagram.com/selina.salvatore?igsh=ZWR3dmVqcmVoNWZ5&utm_source=qr" 
+                   target="_blank" 
+                   class="photo-link">
+                    <img src="https://i.imgur.com/XvG4n1Y.jpeg" alt="Instagram">
+                </a>
+                <div class="photo-logo instagram">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <div class="platform-name">Instagram</div>
+            </div>
+        </div>
+        
+        <!-- TELEGRAM -->
+        <div class="photo-card">
+            <div class="photo-container">
+                <a href="https://t.me/SelinaSalvatoreBot" 
+                   target="_blank" 
+                   class="photo-link">
+                    <img src="https://i.imgur.com/TTGOE9o.jpeg" alt="Telegram">
+                </a>
+                <div class="photo-logo telegram">
+                    <i class="fab fa-telegram"></i>
+                </div>
+                <div class="platform-name">Telegram VIP</div>
+            </div>
+        </div>
+        
+        <!-- TWITTER -->
+        <div class="photo-card">
+            <div class="photo-container">
+                <a href="https://x.com/ravenablxck?s=21" 
+                   target="_blank" 
+                   class="photo-link">
+                    <img src="https://i.imgur.com/dDe09ng.jpeg" alt="Twitter">
+                </a>
+                <div class="photo-logo twitter">
+                    <i class="fab fa-twitter"></i>
+                </div>
+                <div class="platform-name">Twitter</div>
+            </div>
+        </div>
+    
+        <!-- WHATSAPP -->
+        <div class="photo-card">
+            <div class="photo-container">
+                <a href="https://w.app/q2op4q" 
+                   target="_blank" 
+                   class="photo-link">
+                    <img src="https://i.imgur.com/uxnFYaj.jpeg" alt="WhatsApp">
+                </a>
+                <div class="photo-logo whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="platform-name">WhatsApp</div>
+            </div>
+        </div>
+
+    <script>
+        // Todos os links já estão funcionando via onclick e href
+    </script>
+</body>
+</html>
